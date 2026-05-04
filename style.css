@@ -451,7 +451,12 @@ progress::-moz-progress-bar {
   max-width: var(--max-width);
 }
 .gray-scale {
-  filter: grayscale(1);
+  filter: grayscale(100%);
+  transition: 0.3s;
+}
+
+.gray-scale:hover {
+  filter: grayscale(0%);
 }
 
 .none {
