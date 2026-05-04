@@ -53,3 +53,39 @@
       });
   });
 })(document);
+/* ********** Testimonials Carousel ********** */
+((d) => {
+  const $carousel = d.querySelector(".carousel"),
+    $slides = d.querySelector(".carousel .slides"),
+    $prevBtn = d.querySelector(".carousel-btn.prev"),
+    $nextBtn = d.querySelector(".carousel-btn.next"),
+    $dots = d.querySelectorAll(".slides-nav .dot");
+
+  if (!$carousel || !$slides || !$prevBtn || !$nextBtn) return;
+
+  let index = 0;
+  const totalSlides = $dots.length;
+
+  const showSlide = (newIndex) => {
+    index = newIndex;
+
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+
+    $slides.style.transform = `translateX(-${index * 25}%)`;
+
+    $dots.forEach((dot) => dot.classList.remove("active"));
+    $dots[index].classList.add("active");
+  };
+
+  $prevBtn.addEventListener("click", () => showSlide(index - 1));
+  $nextBtn.addEventListener("click", () => showSlide(index + 1));
+
+  $dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => showSlide(i));
+  });
+
+  setInterval(() => {
+    showSlide(index + 1);
+  }, 5000);
+})(document);
